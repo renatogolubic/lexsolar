@@ -40,7 +40,7 @@ body {
     max-width: 800px;
     margin: 0 auto 3rem auto;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.5rem; /* Povećano s 1.2rem */
     line-height: 1.8;
 }
 
@@ -81,13 +81,13 @@ body {
     text-decoration: none;
     color: white;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 1.5rem; /* Povećano s 1.2rem */
     position: relative;
     padding: 0.5rem;
     transition: all 0.3s ease;
     display: inline-block;
     text-align: center;
-    width: 100%;
+    /* width: 100%; */ /* Removed to allow dropdown to size naturally */
 }
 
 .nav-links a:hover {
@@ -132,7 +132,10 @@ body {
 
 /* Hero Section */
 .hero {
-    height: 100vh;
+    /* height: 100vh; */ /* Reduced height */
+    min-height: 70vh; /* Using min-height for flexibility */
+    padding-top: 120px; /* Adjusted padding */
+    padding-bottom: 60px; /* Added padding bottom */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,7 +145,7 @@ body {
     background-position: center;
     background-attachment: fixed;
     margin-bottom: 0;
-    padding-top: 80px;
+    /* padding-top: 80px; */ /* Replaced by more specific padding */
     position: relative;
     overflow: hidden;
 }
@@ -245,7 +248,7 @@ body {
 }
 
 .kit-description {
-    font-size: 1.2rem;
+    font-size: 1.5rem; /* Povećano s 1.2rem */
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.9);
     margin: 2rem auto;
@@ -418,6 +421,56 @@ body {
     background: var(--gold);
 }
 
+/* OTSO Menu Styles */
+.otso-menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.otso-menu-item {
+    background: var(--surface);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.otso-menu-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.otso-menu-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    text-decoration: none;
+    color: var(--text);
+    text-align: center;
+}
+
+.otso-menu-link i {
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.otso-menu-link h4 {
+    font-size: 1.5rem;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+}
+
+.otso-menu-link p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+}
+
 /* News Section */
 .news-section {
     padding: 6rem 2rem;
@@ -430,6 +483,61 @@ body {
     gap: 3rem;
     max-width: 1400px;
     margin: 0 auto;
+}
+
+/* Dropdown specific for 565153227051.html - assuming it uses .dropdown, .dropbtn, .dropdown-content */
+.dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--surface);
+    min-width: 220px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 4px;
+    padding: 0.5rem 0;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content .dropdown-item {
+    padding: 0.5rem 1rem;
+}
+
+.dropdown-content .dropdown-item a {
+    color: var(--text);
+    text-decoration: none;
+    display: block;
+    font-size: 0.9rem;
+    width: auto; /* Override general nav-links a width */
+}
+
+.dropdown-content .dropdown-item p {
+    font-size: 0.8rem;
+    color: var(--text-dark);
+    margin-top: 0.25rem;
+    color: #ccc; /* Lighter text for description */
+}
+
+.dropdown-content .dropdown-item:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Technical Specs Centering */
+.technical-specs {
+    text-align: center; /* Center the block */
+}
+
+.technical-specs ul {
+    display: inline-block; /* Allows text-align on parent to work */
+    text-align: left; /* Align text within list items to the left */
+    list-style-position: inside; /* If using list-style-type */
+    padding-left: 0; /* Remove default ul padding */
+}
+
+.technical-specs h2 {
+    margin-bottom: 1.5rem;
 }
 
 .news-card {
@@ -781,11 +889,61 @@ footer {
     }
 
     .hero-content p {
-        font-size: 1.2rem;
+        font-size: 1.5rem; /* Povećano s 1.2rem */
         margin-bottom: 2rem;
     }
 
-    /* News Section */
+    /* OTSO Menu Styles */
+.otso-menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.otso-menu-item {
+    background: var(--surface);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.otso-menu-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.otso-menu-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    text-decoration: none;
+    color: var(--text);
+    text-align: center;
+}
+
+.otso-menu-link i {
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.otso-menu-link h4 {
+    font-size: 1.5rem;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+}
+
+.otso-menu-link p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+}
+
+/* News Section */
     .news-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -1094,7 +1252,7 @@ footer {
 }
 
 .kit-description {
-    font-size: 1.2rem;
+    font-size: 1.5rem; /* Povećano s 1.2rem */
     line-height: 1.6;
     margin-bottom: 2rem;
     text-align: center;
