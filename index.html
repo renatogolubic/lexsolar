@@ -7,6 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile.css">
 </head>
 <body>
     <nav class="navbar">
@@ -20,7 +21,7 @@
             <div class="nav-links">
                 <a href="#novosti">Novosti</a>
                 <div class="dropdown">
-                    <a href="#proizvodi" class="dropdown-toggle">Proizvodi</a>
+                    <a href="#proizvodi" class="dropdown-toggle">Proizvodi <span class="dropdown-icon"></span></a>
                     <div class="dropdown-menu">
                         <div class="dropdown-item">
                             <a href="obnovljivi-izvori.html">Obnovljivi Izvori Energije</a>
@@ -179,18 +180,68 @@
 document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
+    const dropdowns = document.querySelectorAll('.dropdown');
 
+    // Toggle mobile menu
     hamburger.addEventListener('click', function() {
         navLinks.classList.toggle('active');
         this.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
     });
 
-    // Zatvori menu kada se klikne na link
-    document.querySelectorAll('.nav-links a').forEach(link => {
+    // Handle dropdowns in mobile view
+    dropdowns.forEach(dropdown => {
+        const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+        
+        dropdownToggle.addEventListener('click', function(e) {
+            // Only handle click in mobile view
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+                
+                // Close other open dropdowns
+                dropdowns.forEach(otherDropdown => {
+                    if (otherDropdown !== dropdown && otherDropdown.classList.contains('active')) {
+                        otherDropdown.classList.remove('active');
+                    }
+                });
+            }
+        });
+    });
+
+    // Close menu when clicking on links (except dropdown toggles in mobile view)
+    document.querySelectorAll('.nav-links a:not(.dropdown-toggle)').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
             hamburger.classList.remove('active');
+            document.body.classList.remove('menu-open');
         });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (navLinks.classList.contains('active') && 
+            !navLinks.contains(e.target) && 
+            !hamburger.contains(e.target)) {
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        }
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            // Reset mobile menu state on desktop
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            
+            // Reset all dropdowns
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
     });
 });
         AOS.init({

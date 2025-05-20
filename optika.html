@@ -7,6 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile.css">
 </head>
 <body>
     <nav class="navbar">
@@ -178,17 +179,44 @@
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
             const navLinks = document.querySelector('.nav-links');
+            const dropdowns = document.querySelectorAll('.dropdown');
 
             hamburger.addEventListener('click', function() {
                 navLinks.classList.toggle('active');
                 this.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
             });
 
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', () => {
                     navLinks.classList.remove('active');
                     hamburger.classList.remove('active');
+                    document.body.classList.remove('menu-open');
                 });
+            });
+            
+            // Handle dropdown toggles
+            dropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                });
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    // Reset mobile menu state on desktop
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                    
+                    // Reset all dropdowns
+                    dropdowns.forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                    });
+                }
             });
         });
         AOS.init({
@@ -196,6 +224,7 @@
             once: true,
             offset: 100
         });
+    
     </script>
 </body>
 </html>
